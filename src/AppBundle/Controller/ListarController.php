@@ -26,6 +26,9 @@ class ListarController extends Controller
         $results = $query->getResult();
         dump($results);
 
-        return $this->render("/mascotas/listar.html.twig", ['pets' => $results]);
+        return $this->render("/mascotas/listar.html.twig", [
+            'pets' => $results, 
+            'successMessage' => null
+        ]);
     }
 }

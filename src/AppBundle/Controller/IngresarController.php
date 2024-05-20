@@ -48,7 +48,18 @@ class IngresarController extends Controller
             $entityManager->persist($mascota);
             $entityManager->flush();
     
-            return $this->redirectToRoute('listarMascotas');
+            $query = $entityManager->createQuery(
+                "SELECT m
+                FROM AppBundle:Mascota m"
+            );
+            $results = $query->getResult();
+
+            return $this->render("/mascotas/listar.html.twig", 
+                [
+                    'successMessage' => "mascota fue añadida",
+                    'pets' => $results, 
+                ]
+            );
         }
 
         return $this->render("/mascotas/ingresar.html.twig", [
