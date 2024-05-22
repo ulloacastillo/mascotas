@@ -1,7 +1,13 @@
 {% extends '/mascotas/index.html.twig' %}
 
 {% block main %}
-   <h1> Listar mascotas </h1>
+   <div class="jumbotron bg-light">
+        <h1 class="display-4">Tus mascotas registradas</h1>
+        <p class="lead">Aquí podrás ver las mascotas que se encuentran en el registro y nombre de quien están a cargo.</p>
+        <hr class="my-4">
+        <p>Puedes añadir nuevas mascotas en el siguiente enlace</p>
+        <a class="btn btn-primary btn-lg" href="{{ path('ingresarMascotas') }}" role="button">Añadir mascota</a>
+    </div>
 
    {% for message in app.flashes('success') %}
       <div class="alert alert-success">
@@ -10,30 +16,64 @@
    {% endfor %}
 
    <table class="table">
-      <thead>
-         <tr>
-            <th scope="col">chip</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">tipo</th>
-            <th scope="col">Rut Humano</th>
-            <th scope="col">Color</th>
-         </tr>
-      </thead>
-   <tbody>
-      {% for pet in pets %}
-         <tr>
-            <th scope="row">{{ pet.chip }}</th>
-            <td>{{ pet.nombre }}</td>
-            <td>{{ pet.tipo }}</td>
-            <td>{{ pet.rut }}</td>
-            <td>{{ pet.color }}</td>
+        <thead>
+            <tr>
+                <th scope="col">N° Chip</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Tipo mascota</th>
+                <th scope="col">Sexo</th>
+                <th scope="col">Raza</th>
+                <th scope="col">Fecha Registro</th>
+                <th scope="col">Humano Resonsable</th>
+                <th scope="col">Opciones</th>
 
-         </tr>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pet in pets %}
+                <tr>
+                    <th scope="row">{{ pet.chip }}</th>
+                    <td>{{ pet.nombre }}</td>
+                    <td>{{ pet.tipo }}</td>
+                    <td>{{ pet.sexo }}</td>
+                    <td>{{ pet.raza }}</td>
+                    <td>{{ pet.fechaNacimiento|date('d-m-Y') }}</td>
+                    <td>{{ pet.rut }}</td>
+                    <td>
+                        <div>
+                            <button type="button" class="btn btn-info">E</button>
+                            <button title="Eliminar mascota" type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">X</button>
 
-      {% endfor %}
+                        </div>
+                    </td>
 
-   </tbody>
+
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
    </table>
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar Mascota</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro que deseas eliminar una mascota?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Cerrar</button>
+                <a role="button" href="#" class="btn btn-danger" data-dismiss="modal">Eliminar mascota</a>
+            </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

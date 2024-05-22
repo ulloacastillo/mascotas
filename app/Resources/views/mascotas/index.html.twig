@@ -1,24 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <section  class="d-flex">
-        <aside class="bg-primary ">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('listarMascotas') }}">Mis mascotas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white active" href="{{ path('ingresarMascotas') }}">Ingresar mascota</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ path('modificarMascotas') }}">Modificar mascota</a>
-                </li>
 
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <h2 class="navbar-brand">Tus mascotas</h2>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('listarMascotas') }}">Mis mascotas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('ingresarMascotas') }}">Ingresar mascota</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('modificarMascotas') }}">Modificar mascota</a>
+                </li>
             </ul>
-        </aside>
+
+        </div>
+    </nav>
+    <section class="d-flex">
+
         <main id="content">
             {% block main %}{% endblock %}
-
         </main>
 
     </section>
