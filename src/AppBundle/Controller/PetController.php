@@ -75,12 +75,14 @@ class PetController extends Controller
     }
 
     /**
-     * @Route("/modificar", name="modifyPet")
+     * @Route("/modificar/{chip}", name="modifyPet")
      */
-    public function modifyAction(Request $request)
+    public function modifyAction(Pet $pet)
     {
 
-        return $this->render("/mascotas/modificar.html.twig");
+        return $this->render("/mascotas/modificar.html.twig", [
+            'pet' => $pet
+        ]);
     }
 
     /**

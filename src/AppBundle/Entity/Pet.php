@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Pet
@@ -32,6 +34,7 @@ class Pet
      * @var int
      *
      * @ORM\Column(name="tipo", type="smallint")
+     * @Assert\Choice(choices={1, 2, 3, 4})
      */
     private $tipo;
 
@@ -45,7 +48,8 @@ class Pet
     /**
      * @var bool
      *
-     * @ORM\Column(name="sexo", type="boolean")
+     * @ORM\Column(name="sexo", type="smallint")
+     * @Assert\Choice(choices={1, 2})
      */
     private $sexo;
 
