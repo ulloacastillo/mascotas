@@ -18,7 +18,7 @@ class IngresarController extends Controller
      * @Route("/mascotas/ingresar", name="ingresarMascotas")
      */
     public function mascotasAction(Request $request)
-    {   
+    {
         $mascota = new Mascota();
 
         $form = $this->createFormBuilder($mascota)
@@ -31,7 +31,7 @@ class IngresarController extends Controller
             ->add('raza', TextType::class)
             ->add('estirilizada', CheckboxType::class)
             ->add('rut', TextType::class)
-            ->add('rut', TextType::class)            
+            ->add('rut', TextType::class)
             ->add('save', SubmitType::class, ['label' => 'Añadir Mascota'])
             ->getForm();
 
@@ -41,25 +41,28 @@ class IngresarController extends Controller
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             $mascota = $form->getData();
-    
+
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($mascota);
             $entityManager->flush();
-    
+
             $query = $entityManager->createQuery(
                 "SELECT m
                 FROM AppBundle:Mascota m"
             );
             $results = $query->getResult();
+            $this->addFlash('success', 'Mascota Añadida');
 
-            return $this->render("/mascotas/listar.html.twig", 
-                [
-                    'successMessage' => "mascota fue añadida",
-                    'pets' => $results, 
-                ]
-            );
+            return $this->redirect($this->generateUrl('listarMascotas'));
+
+            // return $this->render("/mascotas/listar.html.twig",
+            //     [
+            //         'successMessage' => "mascota fue añadida",
+            //         'pets' => $results,
+            //     ]
+            // );
         }
 
         return $this->render("/mascotas/ingresar.html.twig", [
