@@ -6,7 +6,7 @@
         <p class="lead">Aquí podrás ver las mascotas que se encuentran en el registro y nombre de quien están a cargo.</p>
         <hr class="my-4">
         <p>Puedes añadir nuevas mascotas en el siguiente enlace</p>
-        <a class="btn btn-primary btn-lg" href="{{ path('ingresarMascotas') }}" role="button">Añadir mascota</a>
+        <a class="btn btn-primary btn-lg" href="{{ path('mascota.ingresarMascotas') }}" role="button">Añadir mascota</a>
     </div>
 
    {% for message in app.flashes('success') %}
