@@ -55,18 +55,14 @@ class PetController extends Controller
             $pet = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($pet);
-            $entityManager->flush();
-
-            $query = $entityManager->createQuery(
-                "SELECT m
-                FROM AppBundle:Pet m"
-            );
-
-
-            $results = $query->getResult();
-
-            dump($results);
+            try {
+                $entityManager->persist($pet);
+                $entityManager->flush();
+            }
+            catch (Exception $e) {
+                $this->addFlash('error', 'Error al Añadir Mascota');
+                return $this->redirect($this->generateUrl('pets.addPet'));
+            }
 
             $this->addFlash('success', 'Mascota Añadida');
             return $this->redirect($this->generateUrl('pets.getPets'));
