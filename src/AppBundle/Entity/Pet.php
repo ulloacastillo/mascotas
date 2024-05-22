@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Mascota
+ * Pet
  *
  * @ORM\Table(name="mascota")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\MascotaRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PetRepository")
  */
-class Mascota
+class Pet
 {
     /**
      * @var int
@@ -107,7 +107,7 @@ class Mascota
      *
      * @param integer $chip
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setChip($chip)
     {
@@ -131,7 +131,7 @@ class Mascota
      *
      * @param integer $tipo
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setTipo($tipo)
     {
@@ -155,7 +155,7 @@ class Mascota
      *
      * @param string $nombre
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setNombre($nombre)
     {
@@ -179,7 +179,7 @@ class Mascota
      *
      * @param boolean $sexo
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setSexo($sexo)
     {
@@ -203,7 +203,7 @@ class Mascota
      *
      * @param string $color
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setColor($color)
     {
@@ -227,7 +227,7 @@ class Mascota
      *
      * @param \DateTime $fechaNacimiento
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setFechaNacimiento($fechaNacimiento)
     {
@@ -251,7 +251,7 @@ class Mascota
      *
      * @param string $raza
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setRaza($raza)
     {
@@ -275,7 +275,7 @@ class Mascota
      *
      * @param boolean $estirilizada
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setEstirilizada($estirilizada)
     {
@@ -299,7 +299,7 @@ class Mascota
      *
      * @param string $rut
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setRut($rut)
     {
@@ -323,7 +323,7 @@ class Mascota
      *
      * @param string $observaciones
      *
-     * @return Mascota
+     * @return Pet
      */
     public function setObservaciones($observaciones)
     {

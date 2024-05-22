@@ -10,22 +10,22 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use AppBundle\Entity\Mascota;
+use AppBundle\Entity\Pet;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 /**
- * @Route("/mascotas", name="mascota.")
+ * @Route("/mascotas", name="pets.")
  */
 class PetController extends Controller
 {
     /**
-     * @Route("/listar", name="listarMascotas")
+     * @Route("/listar", name="getPets")
      */
     public function showAction(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $query = $entityManager->createQuery(
             "SELECT m
-            FROM AppBundle:Mascota m"
+            FROM AppBundle:Pet m"
         );
         $results = $query->getResult();
         dump($results);
@@ -38,13 +38,13 @@ class PetController extends Controller
     }
 
     /**
-     * @Route("/ingresar", name="ingresarMascotas")
+     * @Route("/ingresar", name="addPet")
      */
     public function insertAction(Request $request)
     {
-        $mascota = new Mascota();
+        $pet = new Pet();
 
-        $form = $this->createFormBuilder($mascota)
+        $form = $this->createFormBuilder($pet)
             ->add('chip', IntegerType::class)
             ->add('tipo', IntegerType::class)
             ->add('nombre', TextType::class)
@@ -63,22 +63,22 @@ class PetController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
-            $mascota = $form->getData();
+            $pet = $form->getData();
 
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($mascota);
+            $entityManager->persist($pet);
             $entityManager->flush();
 
             $query = $entityManager->createQuery(
                 "SELECT m
-                FROM AppBundle:Mascota m"
+                FROM AppBundle:Pet m"
             );
             $results = $query->getResult();
             $this->addFlash('success', 'Mascota Añadida');
 
-            return $this->redirect($this->generateUrl('listarMascotas'));
+            return $this->redirect($this->generateUrl('pets.getPets'));
 
             // return $this->render("/mascotas/listar.html.twig",
             //     [
@@ -94,12 +94,25 @@ class PetController extends Controller
     }
 
     /**
-     * @Route("/modificar", name="modificarMascotas")
+     * @Route("/modificar", name="modifyPet")
      */
     public function modifyAction(Request $request)
     {
 
         return $this->render("/mascotas/modificar.html.twig");
+    }
+
+    /**
+     * @Route("/eliminar/{chip}", name="removePet")
+     */
+    public function removeAction(Pet $pet)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($pet);
+        $entityManager->flush();
+        dump('hola');
+        return $this->redirect($this->generateUrl('pets.getPets'));
+
     }
 }
 
